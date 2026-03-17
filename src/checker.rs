@@ -194,7 +194,10 @@ pub async fn check_package(name: &str, registries: &[&'static Registry]) -> Chec
     check_package_inner(name, registries, &client, &semaphore).await
 }
 
-pub async fn check_packages(names: &[String], registries: &[&'static Registry]) -> Vec<CheckResult> {
+pub async fn check_packages(
+    names: &[String],
+    registries: &[&'static Registry],
+) -> Vec<CheckResult> {
     let client = build_client();
     let semaphore = Arc::new(Semaphore::new(20));
 

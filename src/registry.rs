@@ -362,7 +362,11 @@ pub fn registries_by_ids(ids: &[String]) -> Vec<&'static Registry> {
 pub fn registries_by_languages(langs: &[String]) -> Vec<&'static Registry> {
     REGISTRIES
         .iter()
-        .filter(|r| r.languages.iter().any(|l| langs.iter().any(|lang| lang == l)))
+        .filter(|r| {
+            r.languages
+                .iter()
+                .any(|l| langs.iter().any(|lang| lang == l))
+        })
         .collect()
 }
 

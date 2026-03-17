@@ -1,11 +1,8 @@
 use crate::checker;
 use crate::registry;
 use rmcp::{
-    ErrorData as McpError, ServerHandler,
-    handler::server::tool::ToolRouter,
-    handler::server::wrapper::Parameters,
-    model::*,
-    tool_handler, tool_router,
+    ErrorData as McpError, ServerHandler, handler::server::tool::ToolRouter,
+    handler::server::wrapper::Parameters, model::*, tool_handler, tool_router,
 };
 use schemars::JsonSchema;
 use serde::Deserialize;
@@ -89,10 +86,7 @@ impl StakedMcp {
         Parameters(params): Parameters<CheckPackagesParams>,
     ) -> Result<CallToolResult, McpError> {
         if params.names.is_empty() {
-            return Err(McpError::invalid_params(
-                "names list cannot be empty",
-                None,
-            ));
+            return Err(McpError::invalid_params("names list cannot be empty", None));
         }
         if params.names.len() > 50 {
             return Err(McpError::invalid_params(

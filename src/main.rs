@@ -1,9 +1,9 @@
 use clap::{Parser, Subcommand};
+use rmcp::{ServiceExt, transport::stdio};
 use staked::checker;
 use staked::mcp::StakedMcp;
 use staked::registry;
 use staked::types::Availability;
-use rmcp::{ServiceExt, transport::stdio};
 
 #[derive(Parser)]
 #[command(
