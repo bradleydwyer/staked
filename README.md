@@ -2,8 +2,6 @@
 
 Check if a package name is available across 29 registries at once.
 
-> **Experimental.** This project is new and has not been used in production. Use with caution.
-
 ## About
 
 When naming a new library or tool, you want to know which registries already have that name. pkg-check queries npm, PyPI, crates.io, and 26 other package registries in parallel, giving you results in about a second.
@@ -12,11 +10,15 @@ It also runs as an MCP server, so AI assistants can check name availability dire
 
 ## Installation
 
+**Homebrew (macOS):**
+```bash
+brew install bradleydwyer/tap/pkg-check
+```
+
+**From source (requires Rust 1.85+):**
 ```bash
 cargo install --git https://github.com/bradleydwyer/pkg-check
 ```
-
-Requires Rust 1.85+ (edition 2024).
 
 ## Usage
 
