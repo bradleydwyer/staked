@@ -69,7 +69,6 @@ staked -a myname             # all 29 registries
 staked -r npm,crates myname  # specific registries
 staked -l rust,python myname # filter by language
 staked --list-registries     # show all supported registries
-staked mcp                   # start MCP server
 ```
 
 ## Tips

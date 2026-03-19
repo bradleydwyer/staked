@@ -1,7 +1,5 @@
-use clap::{Parser, Subcommand};
-use rmcp::{ServiceExt, transport::stdio};
+use clap::Parser;
 use staked::checker;
-use staked::mcp::StakedMcp;
 use staked::registry;
 use staked::types::Availability;
 
@@ -12,9 +10,6 @@ use staked::types::Availability;
     version
 )]
 struct Cli {
-    #[command(subcommand)]
-    command: Option<Command>,
-
     /// Package names to check
     names: Vec<String>,
 
@@ -43,12 +38,6 @@ struct Cli {
     list_registries: bool,
 }
 
-#[derive(Subcommand)]
-enum Command {
-    /// Start MCP server (stdio transport)
-    Mcp,
-}
-
 fn resolve_registries(cli: &Cli) -> Vec<&'static registry::Registry> {
     if cli.all {
         return registry::all_registries().iter().collect();
@@ -67,13 +56,6 @@ fn resolve_registries(cli: &Cli) -> Vec<&'static registry::Registry> {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let cli = Cli::parse();
-
-    if let Some(Command::Mcp) = cli.command {
-        let server = StakedMcp::new();
-        let service = server.serve(stdio()).await?;
-        service.waiting().await?;
-        return Ok(());
-    }
 
     if cli.list_registries {
         println!("{:<20} {:<25} {:<30} LANGUAGES", "ID", "NAME", "ECOSYSTEM");
@@ -96,7 +78,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     if cli.names.is_empty() {
         eprintln!("Usage: staked [OPTIONS] <NAMES>...");
-        eprintln!("       staked mcp");
         eprintln!("       staked --list-registries");
         eprintln!();
         eprintln!("Run 'staked --help' for more information.");

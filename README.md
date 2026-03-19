@@ -6,7 +6,7 @@
 
 Check if a package name is available across 29 registries at once.
 
-Queries npm, PyPI, crates.io, and 26 other registries in parallel. Results come back in about a second. Also runs as an MCP server.
+Queries npm, PyPI, crates.io, and 26 other registries in parallel. Results come back in about a second.
 
 ## Install
 
@@ -69,18 +69,6 @@ $ staked -j -r npm,crates my-lib
 ```
 
 Returns structured JSON with per-registry results, browse URLs, and timing.
-
-### MCP server
-
-```
-$ staked mcp
-```
-
-Three tools over stdio:
-
-- **check_package** - Check a single name
-- **check_packages** - Check up to 50 names in bulk
-- **list_registries** - List available registries
 
 ## Registries
 
